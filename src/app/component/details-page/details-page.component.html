@@ -1,0 +1,32 @@
+<div class="detail-page">
+    <form>
+        <div>
+            <h1>Employee Details</h1>
+        </div>
+        <table>
+            <tr class="tb-head">
+                <th>Name</th>
+                <th>Address</th>
+                <th>DOB</th>
+                <th>Role</th>
+                <th>Gender</th>
+                <th>Phone</th>
+            </tr>
+            <tr *ngFor="let employee of employeeDetails">
+                <td>{{employee.name}}</td>
+                <td>{{employee.address}}</td>
+                <td>{{employee.dob | date:'mediumDate'}}</td>
+                <td>{{employee.role}}</td>
+                <td>{{employee.gender}}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let phone of employee.phoneNumbers"><span>{{phone.phoneNumber}}</span></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div class="add-btn">
+            <button type="button" (click)="addNew()">Add New</button>
+        </div>
+    </form>
+</div>

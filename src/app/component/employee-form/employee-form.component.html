@@ -1,0 +1,75 @@
+<div class="em-form-cont">
+    <form [formGroup]="employeeForm" (ngSubmit)="submitDetails(employeeForm); isFormSubmitted=true;">
+        <div>
+            <label>
+                Name:
+                <input type="text" formControlName="name" placeholder="Employee Name">
+            </label>
+        </div>
+        <div>
+            <label>
+                Address:
+                <textarea formControlName="address" placeholder="Address"></textarea>
+            </label>
+        </div>
+        <div>
+            <label>
+                DOB:
+                <input formControlName="dob" placeholder="DOB" bsDatepicker>
+            </label>
+        </div>
+        <div>
+            <label>
+                Role:
+                <select formControlName="role">
+                    <option [ngValue]="null" [disabled]="true">
+                        Select role
+                    </option>
+                    <option value="Admin">
+                        Admin
+                    </option>
+                    <option value="Manager">
+                        Manager
+                    </option>
+                    <option value="HR">
+                        HR
+                    </option>
+                    <option value="Developer">
+                        Developer
+                    </option>
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <div>
+                <label formArrayName="phone">
+                    <span>Phone Number:
+                    </span>
+                    <div class="phn-cont" *ngFor="let number of userFormGroups.controls; let i=index"
+                        [formGroupName]="i">
+                        <input formControlName="phoneNumber" placeholder="Phone Number">
+                        <label *ngIf="((i + 1) == userFormGroups.controls.length)" (click)="addContact('')">Add(+)
+                        </label>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <label class="em-radio">
+                Gender:
+                <label>
+                    <input type="radio" value="Male" formControlName="gender" placeholder="Gender">
+                    <span>male</span>
+                </label>
+                <label>
+                    <input type="radio" value="Female" formControlName="gender" placeholder="Gender">
+                    <span>female</span>
+                </label>
+            </label>
+        </div>
+        <button type="submit">Submit</button>
+        <div class="error" *ngIf="isFormSubmitted && !employeeForm.valid">*All fields are mandatory</div>
+    </form>
+</div>
